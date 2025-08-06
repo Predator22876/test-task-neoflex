@@ -1,0 +1,16 @@
+.productList {
+    margin: 15px 0;
+}
+
+.productList__title {
+    font-size: 20px;
+    color: var(--product-title-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.productList__cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}

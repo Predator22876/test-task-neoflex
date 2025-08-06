@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --logo-color: #101010;
+    --main-bg-color: #EAEAEA;
+    --main-accent-color: #FFA542;
+    --main-title-color: #1C1C27;
+    --product-title-color: #838383;
+}
+
+html,
+body {
+    background: var(--main-bg-color);
+    font-family: Montserrat, sans-serif;
+    height: 100%;
+}
+
+.App {
+    margin: 0 auto;
+    height: 100%;
+    max-width: 1110px;
+}

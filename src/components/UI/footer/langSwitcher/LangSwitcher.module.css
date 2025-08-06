@@ -1,0 +1,18 @@
+.langGroup {
+    width: 111px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.langGroup__item {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--logo-color);
+}
+
+.langGroup__item.active {
+    font-weight: 700;
+    color: var(--main-accent-color);
+}

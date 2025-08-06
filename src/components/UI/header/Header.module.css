@@ -1,0 +1,28 @@
+.myHeader {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.headerLogo {
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--main-title-color);
+    cursor: pointer;
+}
+
+.headerLinks {
+    width: 120px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.headerLinks__item {
+    height: 25px;
+    width: 25px;
+}
