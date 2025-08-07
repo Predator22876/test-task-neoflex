@@ -1,9 +1,13 @@
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.jsx'
+import Basket from './Bakset.jsx'
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
-        <App />
+        <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/basket" element={<Basket />} />
+        </Routes>
     </BrowserRouter>
 )

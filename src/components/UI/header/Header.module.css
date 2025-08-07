@@ -22,7 +22,37 @@
     gap: 40px;
 }
 
+.headerLinks__group {
+    position: relative; /* Родительский контейнер для absolute позиционирования */
+    display: inline-block;
+
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.headerLinks__group:hover {
+    opacity: 65%;
+}
+
 .headerLinks__item {
     height: 25px;
     width: 25px;
+}
+
+.headerLinks__item_count {
+    position: absolute;
+    top: -4px;
+    right: -8px;
+
+    width: 17px;
+    height: 17px;
+    font-size: 15px;
+    font-weight: 500;
+    background: var(--main-accent-color);
+    color: #FFF;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

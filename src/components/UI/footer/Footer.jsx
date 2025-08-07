@@ -5,11 +5,13 @@ import LangSwitcher from './langSwitcher/LangSwitcher';
 const Footer = () => {
     return (
         <footer className={s.myFooter}>
-            <h1 className={s.footerLogo}>QPICK</h1>
+            <h1 className={s.footerLogo}>
+                <Link style={{ textDecoration: 'none', color: 'var(--main-title-color)' }} to={'/'}>QPICK</Link>
+            </h1>
             <div className={s.footerLinks}>
                 <div className={s.footerLinks__group1}>
                     <Link className={s.footerLinks__item}>Избранное</Link>
-                    <Link className={s.footerLinks__item}>Корзина</Link>
+                    <Link to={'/basket'} className={s.footerLinks__item}>Корзина</Link>
                     <Link className={s.footerLinks__item}>Контакты</Link>
                 </div>
                 <div className={s.footerLinks__group2}>
