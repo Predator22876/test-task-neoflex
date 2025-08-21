@@ -1,0 +1,72 @@
+.basketItemCard {
+    background: #fff;
+    height: 218px;
+    width: 633px;
+    border-radius: 30px;
+    margin: 15px 0;
+}
+
+.cardContent {
+    padding: 18px 28px 15px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.cardContent__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.cardContentInfo {
+    height: 136px;
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.infoText {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cardContent__bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom_buttons {
+    margin-left: 12px;
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    height: 100%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #FFCE7F;
+    border: none;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.button:hover {
+    opacity: 70%;
+}
+
+.resultPrice {
+    font-weight: 600;
+    font-size: 15px;
+}
