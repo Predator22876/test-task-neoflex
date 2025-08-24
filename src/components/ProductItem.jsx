@@ -1,11 +1,11 @@
 import React from 'react'
 import s from './ProductItem.module.css'
 
-const ProductItem = ({addBasket, product}) => {
+const ProductItem = ({ addBasket, product }) => {
 
-    function addItem () {
+    function addItem() {
         const newItem = {
-            ...product
+            ...product,
         }
         addBasket(newItem);
     }
@@ -18,7 +18,7 @@ const ProductItem = ({addBasket, product}) => {
             <div className={s.productInfo}>
                 <div className={s.productInfo__top}>
                     <h3 style={{ fontSize: '17px', fontWeight: '600' }}>{product.title}</h3>
-                    <p style={{ fontSize: '17px', fontWeight: '600', color: 'var(--main-accent-color)' }}>{product.price}</p>
+                    <p style={{ fontSize: '17px', fontWeight: '600', color: 'var(--main-accent-color)' }}>{product.price} ₽</p>
                 </div>
                 <div className={s.productInfo__bottom}>
                     <div className={s.productInfo__botom_rating}>
