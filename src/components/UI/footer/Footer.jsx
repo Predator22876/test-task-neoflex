@@ -20,9 +20,9 @@ const Footer = () => {
                 </div>
             </div>
             <div className={s.footerLinks__socials}>
-                <img src="./src/assets/VK.svg" alt="VK" />
-                <img src="./src/assets/Telegram.svg" alt="Telegram" />
-                <img src="./src/assets/Whatsapp.svg" alt="Whatsapp" />
+                <img src="/src/assets/VK.svg" alt="VK" />
+                <img src="/src/assets/Telegram.svg" alt="Telegram" />
+                <img src="/src/assets/Whatsapp.svg" alt="Whatsapp" />
             </div>
         </footer>
     )

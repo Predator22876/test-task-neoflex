@@ -8,15 +8,15 @@ import { Input } from 'antd'
 function App() {
 
     const [earPhones] = useState([
-        { id: '1', img: './src/assets/Apple BYZ S852I.png', title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
-        { id: '2', img: './src/assets/Apple EarPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '3', img: './src/assets/Apple AirPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '4', img: './src/assets/Apple BYZ S852I.png', title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
-        { id: '5', img: './src/assets/Apple EarPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '6', img: './src/assets/Apple AirPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '7', img: './src/assets/AirPods.png', title: 'Apple AirPods', price: 9527, rate: '4.7', category: 'wireless' },
-        { id: '8', img: './src/assets/HERLAX GH- 04.png', title: 'GERLAX GH-04', price: 6527, rate: '4.7', category: 'wireless' },
-        { id: '9', img: './src/assets/BOROFONE BO4.png', title: 'BOROFONE BO4', price: 7527, rate: '4.7', category: 'wireless' }
+        { id: '1', img: '/src/assets/Apple BYZ S852I.png', title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
+        { id: '2', img: '/src/assets/Apple EarPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
+        { id: '3', img: '/src/assets/Apple AirPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
+        { id: '4', img: '/src/assets/Apple BYZ S852I.png', title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
+        { id: '5', img: '/src/assets/Apple EarPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
+        { id: '6', img: '/src/assets/Apple AirPods.png', title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
+        { id: '7', img: '/src/assets/AirPods.png', title: 'Apple AirPods', price: 9527, rate: '4.7', category: 'wireless' },
+        { id: '8', img: '/src/assets/HERLAX GH- 04.png', title: 'GERLAX GH-04', price: 6527, rate: '4.7', category: 'wireless' },
+        { id: '9', img: '/src/assets/BOROFONE BO4.png', title: 'BOROFONE BO4', price: 7527, rate: '4.7', category: 'wireless' }
     ]);
 
     const [basketItems, setBasketItems] = useState([]);

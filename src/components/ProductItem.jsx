@@ -22,7 +22,7 @@ const ProductItem = ({ addBasket, product }) => {
                 </div>
                 <div className={s.productInfo__bottom}>
                     <div className={s.productInfo__botom_rating}>
-                        <img src="./src/assets/starRate.svg" alt="Rating" />
+                        <img src="/src/assets/starRate.svg" alt="Rating" />
                         <p style={{ fontSize: '17px', fontWeight: '600', color: '#838383' }}>{product.rate}</p>
                     </div>
                     <button onClick={addItem} className={s.buyButton}>Купить</button>
