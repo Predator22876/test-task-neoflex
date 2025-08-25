@@ -1,17 +1,20 @@
 import s from './Header.module.css';
 import { Link } from 'react-router-dom';
+import { useScroll } from '../../hooks/useScroll/useScroll';
 
 import basket from './../../../assets/basket.svg'
 import favourite from './../../../assets/favourite.svg'
 
 const Header = ({ basketItems }) => {
 
+    const isScrolled = useScroll(10)
+
     const countProducts = basketItems.reduce(
         (accum, item) => accum + item.quantity,
         0)
 
     return (
-        <header className={s.myHeader}>
+        <header className={`${s.myHeader} ${(isScrolled ? s.scrolled : '')}`}>
             <h1 className={s.headerLogo}>
                 <Link style={{ textDecoration: 'none', color: 'var(--main-title-color)' }} to={'/'}>QPICK</Link>
             </h1>
