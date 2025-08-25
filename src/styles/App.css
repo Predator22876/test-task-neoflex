@@ -24,3 +24,8 @@ body {
     height: 100%;
     max-width: 1110px;
 }
+
+.myInput {
+    /* border-radius: 10px; */
+    background: var(--main-bg-color);
+}
