@@ -1,5 +1,7 @@
 import s from './BasketItem.module.css';
 
+import deleteI from './../assets/DeleteItem.svg';
+
 const BasketItem = ({ item, deleteAll, index, onIncrease, onDecrease }) => {
 
     function deleteCard() {
@@ -18,7 +20,7 @@ const BasketItem = ({ item, deleteAll, index, onIncrease, onDecrease }) => {
                         </div>
                     </div>
                     <button onClick={deleteCard} style={{ background: 'transparent', border: 'none', width: '30px', height: '30px', cursor: 'pointer' }}>
-                        <img src="./src/assets/DeleteItem.svg" alt="Delete" />
+                        <img src={deleteI} alt="Delete" />
                     </button>
                 </div>
                 <div className={s.cardContent__bottom}>

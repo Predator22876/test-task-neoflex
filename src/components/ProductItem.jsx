@@ -1,6 +1,8 @@
 import React from 'react'
 import s from './ProductItem.module.css'
 
+import starRate from './../assets/starRate.svg'
+
 const ProductItem = ({ addBasket, product }) => {
 
     function addItem() {
@@ -22,7 +24,7 @@ const ProductItem = ({ addBasket, product }) => {
                 </div>
                 <div className={s.productInfo__bottom}>
                     <div className={s.productInfo__botom_rating}>
-                        <img src="/src/assets/starRate.svg" alt="Rating" />
+                        <img src={starRate} alt="Rating" />
                         <p style={{ fontSize: '17px', fontWeight: '600', color: '#838383' }}>{product.rate}</p>
                     </div>
                     <button onClick={addItem} className={s.buyButton}>Купить</button>

@@ -2,6 +2,10 @@ import { Link } from 'react-router-dom';
 import s from './Footer.module.css';
 import LangSwitcher from './langSwitcher/LangSwitcher';
 
+import vk from './../../../assets/VK.svg'
+import telegram from './../../../assets/Telegram.svg'
+import whatsApp from './../../../assets/Whatsapp.svg'
+
 const Footer = () => {
     return (
         <footer className={s.myFooter}>
@@ -20,9 +24,9 @@ const Footer = () => {
                 </div>
             </div>
             <div className={s.footerLinks__socials}>
-                <img src="/src/assets/VK.svg" alt="VK" />
-                <img src="/src/assets/Telegram.svg" alt="Telegram" />
-                <img src="/src/assets/Whatsapp.svg" alt="Whatsapp" />
+                <img src={vk} alt="VK" />
+                <img src={telegram} alt="Telegram" />
+                <img src={whatsApp} alt="Whatsapp" />
             </div>
         </footer>
     )

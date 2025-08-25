@@ -1,6 +1,9 @@
 import s from './Header.module.css';
 import { Link } from 'react-router-dom';
 
+import basket from './../../../assets/basket.svg'
+import favourite from './../../../assets/favourite.svg'
+
 const Header = ({ basketItems }) => {
 
     const countProducts = basketItems.reduce(
@@ -14,12 +17,12 @@ const Header = ({ basketItems }) => {
             </h1>
             <div className={s.headerLinks}>
                 <div className={s.headerLinks__group}>
-                    <img className={s.headerLinks__item} src="/src/assets/basket.svg" alt="Favourite products" />
+                    <img className={s.headerLinks__item} src={basket} alt="Favourite products" />
                     <span className={s.headerLinks__item_count}>0</span>
                 </div>
                 <div className={s.headerLinks__group}>
                     <Link to={'/basket'}>
-                        <img className={s.headerLinks__item} src="/src/assets/favourite.svg" alt="Basket products" />
+                        <img className={s.headerLinks__item} src={favourite} alt="Basket products" />
                         <span className={s.headerLinks__item_count}>{countProducts}</span>
                     </Link>
                 </div>
