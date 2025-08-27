@@ -1,47 +1,55 @@
-import './styles/App.css';
 import { useEffect, useMemo, useState } from 'react';
-import Header from './components/UI/header/Header';
+import { useCategorizedProducts } from './components/hooks/useCategorizedProducts/useCategorizedProducts';
+import { Input, Select } from 'antd';
 import ProductsList from './components/ProductsList';
 import Footer from './components/UI/footer/Footer';
-import { Input } from 'antd'
+import Header from './components/UI/header/Header';
+import './styles/App.css';
 
-import appleBYZ from './assets/Apple BYZ S852I.png'
-import earPods from './assets/Apple EarPods.png'
-import appleAirPods from './assets/Apple AirPods.png'
-import airPods from './assets/AirPods.png'
-import herlax from './assets/HERLAX GH- 04.png'
-import borofone from './assets/BOROFONE BO4.png'
+import airPods from './assets/AirPods.png';
+import appleAirPods from './assets/Apple AirPods.png';
+import appleBYZ from './assets/Apple BYZ S852I.png';
+import earPods from './assets/Apple EarPods.png';
+import borofone from './assets/BOROFONE BO4.png';
+import herlax from './assets/HERLAX GH- 04.png';
 
 function App() {
 
     const [earPhones] = useState([
-        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
-        { id: '2', img: earPods, title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: '4.7', category: 'earphones' },
-        { id: '5', img: earPods, title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: '4.5', category: 'earphones' },
-        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: '4.7', category: 'wireless' },
-        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: '4.7', category: 'wireless' },
-        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: '4.7', category: 'wireless' }
+        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.7, category: 'earphones' },
+        { id: '2', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
+        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
+        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.7, category: 'earphones' },
+        { id: '5', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
+        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
+        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 4.7, category: 'wireless' },
+        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 4.7, category: 'wireless' },
+        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.7, category: 'wireless' }
     ]);
 
     const [basketItems, setBasketItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
-
-    
+    const [sortMethod, setSortMethod] = useState('');
 
     const searchedProducts = useMemo(() => {
         return [...earPhones].filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    }, [earPhones, searchQuery])
+    }, [earPhones, searchQuery]);
 
-    const wirelessProducts = useMemo(() => {
-        return [...searchedProducts].filter(item => item.category === 'wireless')
-    }, [searchedProducts])
+    const sortedAndSearchedProducts = useMemo(() => {
+        if (!sortMethod) return searchedProducts;
 
-    const earphonesProducts = useMemo(() => {
-        return [...searchedProducts].filter(item => item.category === 'earphones')
-    }, [searchedProducts])
+        const sorted = [...searchedProducts];
+
+        if (sortMethod === 'title') {
+            sorted.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sortMethod === 'rate') {
+            sorted.sort((a, b) => b.rate - a.rate);
+        }
+
+        return sorted;
+    }, [searchedProducts, sortMethod]);
+
+    const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless'])
 
     useEffect(() => {
         const savedBasket = sessionStorage.getItem('basketItems');
@@ -72,8 +80,17 @@ function App() {
         <div className='App'>
             <Header basketItems={basketItems} />
             <Input onChange={e => setSearchQuery(e.target.value)} value={searchQuery} className='myInput' placeholder='Поиск...' variant='underlined' />
-            <ProductsList addBasket={addToBasket} title='Наушники' products={earphonesProducts} />
-            <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={wirelessProducts} />
+            <Select
+                defaultValue='Сортировка'
+                options={[
+                    { label: 'по рейтингу', value: 'rate' },
+                    { label: 'по названию', value: 'title' }
+                ]}
+                onChange={value => setSortMethod(value)}
+                className={'mySelect'}
+            />
+            <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
+            <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={category.wireless} />
             <Footer />
         </div>
     )

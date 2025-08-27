@@ -26,6 +26,10 @@ body {
 }
 
 .myInput {
-    /* border-radius: 10px; */
     background: var(--main-bg-color);
+}
+
+.mySelect {
+    margin-top: 15px;
+    width: 150px;
 }
