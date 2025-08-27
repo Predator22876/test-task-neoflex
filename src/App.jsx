@@ -29,15 +29,17 @@ function App() {
     const [basketItems, setBasketItems] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
+    
+
     const searchedProducts = useMemo(() => {
         return [...earPhones].filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
     }, [earPhones, searchQuery])
 
-    const wirelessProducts = useMemo( () => {
+    const wirelessProducts = useMemo(() => {
         return [...searchedProducts].filter(item => item.category === 'wireless')
     }, [searchedProducts])
 
-    const earphonesProducts = useMemo( () => {
+    const earphonesProducts = useMemo(() => {
         return [...searchedProducts].filter(item => item.category === 'earphones')
     }, [searchedProducts])
 
