@@ -16,38 +16,37 @@ import herlax from './assets/HERLAX GH- 04.png';
 function App() {
 
     const [earPhones] = useState([
-        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.7, category: 'earphones' },
+        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.3, category: 'earphones' },
         { id: '2', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
         { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
-        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.7, category: 'earphones' },
-        { id: '5', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
-        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
-        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 4.7, category: 'wireless' },
-        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 4.7, category: 'wireless' },
-        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.7, category: 'wireless' }
+        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.6, category: 'earphones' },
+        { id: '5', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones' },
+        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones' },
+        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 5, category: 'wireless' },
+        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 3.8, category: 'wireless' },
+        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.1, category: 'wireless' }
     ]);
 
     const [basketItems, setBasketItems] = useState([]);
-    const [searchQuery, setSearchQuery] = useState('');
-    const [sortMethod, setSortMethod] = useState('');
+    const [filter, setFilter] = useState({searchQuery: '', sortMethod: ''})
 
     const searchedProducts = useMemo(() => {
-        return [...earPhones].filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
-    }, [earPhones, searchQuery]);
+        return [...earPhones].filter(item => item.title.toLowerCase().includes(filter.searchQuery.toLowerCase()))
+    }, [earPhones, filter.searchQuery]);
 
     const sortedAndSearchedProducts = useMemo(() => {
-        if (!sortMethod) return searchedProducts;
+        if (!filter.sortMethod) return searchedProducts;
 
         const sorted = [...searchedProducts];
 
-        if (sortMethod === 'title') {
+        if (filter.sortMethod === 'title') {
             sorted.sort((a, b) => a.title.localeCompare(b.title));
-        } else if (sortMethod === 'rate') {
+        } else if (filter.sortMethod === 'rate') {
             sorted.sort((a, b) => b.rate - a.rate);
         }
 
         return sorted;
-    }, [searchedProducts, sortMethod]);
+    }, [searchedProducts, filter.sortMethod]);
 
     const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless'])
 
@@ -79,14 +78,14 @@ function App() {
     return (
         <div className='App'>
             <Header basketItems={basketItems} />
-            <Input onChange={e => setSearchQuery(e.target.value)} value={searchQuery} className='myInput' placeholder='Поиск...' variant='underlined' />
+            <Input onChange={e => setFilter({...filter, searchQuery: e.target.value})} value={filter.searchQuery} className='myInput' placeholder='Поиск...' variant='underlined' />
             <Select
                 defaultValue='Сортировка'
                 options={[
                     { label: 'по рейтингу', value: 'rate' },
                     { label: 'по названию', value: 'title' }
                 ]}
-                onChange={value => setSortMethod(value)}
+                onChange={value => setFilter({...filter, sortMethod: value})}
                 className={'mySelect'}
             />
             <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
