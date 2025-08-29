@@ -1,0 +1,45 @@
+.filter {
+    max-width: 150px;
+    margin-top: 15px;
+    padding: 5px;
+    border: 2px solid #1C1C27;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-size: 15px;
+}
+
+.filter.active,
+.filter.active:hover {
+    font-weight: 600;
+    background: white;
+    color: #000;
+}
+
+.filter:hover {
+    background: white;
+}
+
+.filter img {
+    height: 24px;
+    width: 24px;
+}
+
+.contentOption {
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 20px;
+    border-radius: 5px;
+}
+
+.activeOption {
+    font-weight: 600 !important;
+    /* background-color: #e6f7ff; */
+}
+
+.contentOption:hover {
+    background: var(--main-bg-color);
+}

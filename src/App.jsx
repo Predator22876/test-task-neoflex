@@ -1,11 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useCategorizedProducts } from './components/hooks/useCategorizedProducts/useCategorizedProducts';
-import { Input, Select } from 'antd';
+import { Input, Select, Popover } from 'antd';
 import ProductsList from './components/ProductsList';
 import Footer from './components/UI/footer/Footer';
 import Header from './components/UI/header/Header';
+import { Filters } from './components/Filters';
 import './styles/App.css';
 
+// import of images
 import airPods from './assets/AirPods.png';
 import appleAirPods from './assets/Apple AirPods.png';
 import appleBYZ from './assets/Apple BYZ S852I.png';
@@ -27,9 +29,13 @@ function App() {
         { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.1, category: 'wireless' }
     ]);
 
+    // states 
     const [basketItems, setBasketItems] = useState([]);
-    const [filter, setFilter] = useState({searchQuery: '', sortMethod: ''})
+    const [filter, setFilter] = useState({ searchQuery: '', sortMethod: '' });
+    const [visible, setVisible] = useState(false);
+    // ------------------------------------------------------------------------
 
+    // filters and search
     const searchedProducts = useMemo(() => {
         return [...earPhones].filter(item => item.title.toLowerCase().includes(filter.searchQuery.toLowerCase()))
     }, [earPhones, filter.searchQuery]);
@@ -49,7 +55,9 @@ function App() {
     }, [searchedProducts, filter.sortMethod]);
 
     const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless'])
+    // --------------------------------------------------------------------------------------------
 
+    // actions with localStorage
     useEffect(() => {
         const savedBasket = sessionStorage.getItem('basketItems');
         if (savedBasket) {
@@ -59,7 +67,8 @@ function App() {
 
     useEffect(() => {
         sessionStorage.setItem('basketItems', JSON.stringify(basketItems));
-    }, [basketItems])
+    }, [basketItems]);
+    // ----------------------------------------------------------------------------
 
     function addToBasket(newItem) {
         setBasketItems(prev => {
@@ -69,16 +78,24 @@ function App() {
                     return item.id === newItem.id
                         ? { ...item, quantity: item.quantity + 1 }
                         : item
-                })
+                });
             }
-            return [...prev, { ...newItem, quantity: 1 }]
-        })
+            return [...prev, { ...newItem, quantity: 1 }];
+        });
     }
 
     return (
         <div className='App'>
             <Header basketItems={basketItems} />
-            <Input onChange={e => setFilter({...filter, searchQuery: e.target.value})} value={filter.searchQuery} className='myInput' placeholder='Поиск...' variant='underlined' />
+            <Input onChange={e => setFilter({ ...filter, searchQuery: e.target.value })}
+                value={filter.searchQuery}
+                className='myInput'
+                placeholder='Поиск...'
+                variant='underlined'
+            />
+            <Filters onClick={() => setVisible(true)} visible={visible} setVisible={setVisible} setFilter={setFilter} filter={filter} />
+
+            {/*             
             <Select
                 defaultValue='Сортировка'
                 options={[
@@ -87,7 +104,8 @@ function App() {
                 ]}
                 onChange={value => setFilter({...filter, sortMethod: value})}
                 className={'mySelect'}
-            />
+            /> */}
+
             <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
             <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={category.wireless} />
             <Footer />
@@ -95,4 +113,4 @@ function App() {
     )
 }
 
-export default App
+export default App;
