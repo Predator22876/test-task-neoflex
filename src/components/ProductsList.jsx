@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductItem from './ProductItem'
 import s from './ProductsList.module.css'
 

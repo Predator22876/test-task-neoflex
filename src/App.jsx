@@ -4,7 +4,6 @@ import { Input, Select, Popover } from 'antd';
 import ProductsList from './components/ProductsList';
 import Footer from './components/UI/footer/Footer';
 import Header from './components/UI/header/Header';
-import { Filters } from './components/Filters';
 import './styles/App.css';
 
 // import of images
@@ -14,15 +13,16 @@ import appleBYZ from './assets/Apple BYZ S852I.png';
 import earPods from './assets/Apple EarPods.png';
 import borofone from './assets/BOROFONE BO4.png';
 import herlax from './assets/HERLAX GH- 04.png';
+import { Filters } from './components/Filters';
 
 function App() {
 
     const [earPhones] = useState([
-        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.3, category: 'earphones' },
-        { id: '2', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
-        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4.5, category: 'earphones' },
-        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 2927, rate: 4.6, category: 'earphones' },
-        { id: '5', img: earPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones' },
+        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 6789, rate: 4.3, category: 'earphones' },
+        { id: '2', img: earPods, title: 'Apple EarPods', price: 4248, rate: 4.5, category: 'earphones' },
+        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 8853, rate: 4.5, category: 'earphones' },
+        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 1813, rate: 4.6, category: 'earphones' },
+        { id: '5', img: earPods, title: 'Apple EarPods', price: 3200, rate: 4, category: 'earphones' },
         { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones' },
         { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 5, category: 'wireless' },
         { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 3.8, category: 'wireless' },
@@ -31,8 +31,8 @@ function App() {
 
     // states 
     const [basketItems, setBasketItems] = useState([]);
-    const [filter, setFilter] = useState({ searchQuery: '', sortMethod: '' });
-    const [visible, setVisible] = useState(false);
+    const [filter, setFilter] = useState({ searchQuery: '', sortMethod: '', groupBy: '' });
+    // const [visible, setVisible] = useState(false);
     // ------------------------------------------------------------------------
 
     // filters and search
@@ -49,6 +49,10 @@ function App() {
             sorted.sort((a, b) => a.title.localeCompare(b.title));
         } else if (filter.sortMethod === 'rate') {
             sorted.sort((a, b) => b.rate - a.rate);
+        } else if (filter.sortMethod === 'priceDown') {
+            sorted.sort((a, b) => b.price - a.price);
+        } else if (filter.sortMethod === 'priceUp') {
+            sorted.sort((a, b) => a.price - b.price);
         }
 
         return sorted;
@@ -93,24 +97,26 @@ function App() {
                 placeholder='Поиск...'
                 variant='underlined'
             />
-            <Filters onClick={() => setVisible(true)} visible={visible} setVisible={setVisible} setFilter={setFilter} filter={filter} />
+            <Filters filter={filter} setFilter={setFilter} />
+            
+            {filter.groupBy === 'category'
+                ?
+                <>
+                    <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
+                    <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={category.wireless} />
+                </>
+                :
+                <>
+                    <ProductsList addBasket={addToBasket} title='Наушники' products={sortedAndSearchedProducts} />
+                </>
+            }
 
-            {/*             
-            <Select
-                defaultValue='Сортировка'
-                options={[
-                    { label: 'по рейтингу', value: 'rate' },
-                    { label: 'по названию', value: 'title' }
-                ]}
-                onChange={value => setFilter({...filter, sortMethod: value})}
-                className={'mySelect'}
-            /> */}
-
-            <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
-            <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={category.wireless} />
             <Footer />
         </div>
     )
 }
 
 export default App;
+
+// import { Filters } from './components/Filters';
+{/* <Filters onClick={() => setVisible(true)} visible={visible} setVisible={setVisible} setFilter={setFilter} filter={filter} /> */ }

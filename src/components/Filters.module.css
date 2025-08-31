@@ -2,25 +2,26 @@
     max-width: 150px;
     margin-top: 15px;
     padding: 5px;
-    border: 2px solid #1C1C27;
-    border-radius: 15px;
+    border: 1px solid #cbcbcc;
+    background: white;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 5px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: opacity 0.3s ease;
     font-size: 15px;
 }
 
 .filter.active,
 .filter.active:hover {
-    font-weight: 600;
+    /* font-weight: 600; */
     background: white;
     color: #000;
 }
 
 .filter:hover {
-    background: white;
+    opacity: 65%;
 }
 
 .filter img {
@@ -29,7 +30,7 @@
 }
 
 .contentOption {
-    font-size: 22px;
+    font-size: 18px;
     cursor: pointer;
     padding: 0 20px;
     border-radius: 5px;

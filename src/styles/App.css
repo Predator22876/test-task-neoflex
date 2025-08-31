@@ -34,5 +34,8 @@ body {
     width: 150px;
 }
 
-
+.filters {
+    display: flex;
+    gap: 30px;
+}
 
