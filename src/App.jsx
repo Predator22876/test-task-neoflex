@@ -4,16 +4,24 @@ import Header from "./components/UI/header/Header";
 import Catalog from "./components/Catalog";
 import './styles/App.css';
 
+import EarphonesIMG from "./assets/earphones.jpg";
+import KeyboardsIMG from "./assets/keyboards.png";
+import MiceIMG from "./assets/mice.jpg";
+import MonitorsIMG from "./assets/monitors.jpg";
+import NotebooksIMG from "./assets/notebooks.jpg";
+import CarpetsIMG from "./assets/mousecarpet.jpg";
+import VideocardsIMG from "./assets/videocards.png";
+
 const App = () => {
     
     const [catalogItems] = useState([
-        { name: 'Наушники', image: '/src/assets/earphones.jpg', path: '/earphones' },
-        { name: 'Клавиатуры', image: '/src/assets/keyboards.png', path: '' },
-        { name: 'Мыши', image: '/src/assets/mice.jpg', path: '' },
-        { name: 'Мониторы', image: '/src/assets/monitors.jpg', path: '' },
-        { name: 'Ноутбуки', image: '/src/assets/notebooks.jpg', path: '' },
-        { name: 'Ковры для мыши', image: '/src/assets/mousecarpet.jpg', path: '' },
-        { name: 'Видеокарты', image: '/src/assets/videocards.png', path: '' },
+        { name: 'Наушники', image: EarphonesIMG, path: '/earphones' },
+        { name: 'Клавиатуры', image: KeyboardsIMG, path: '' },
+        { name: 'Мыши', image: MiceIMG, path: '' },
+        { name: 'Мониторы', image: MonitorsIMG, path: '' },
+        { name: 'Ноутбуки', image: NotebooksIMG, path: '' },
+        { name: 'Ковры для мыши', image: CarpetsIMG, path: '' },
+        { name: 'Видеокарты', image: VideocardsIMG, path: '' },
     ]);
 
     const [basketItems, setBasketItems] = useState([]);
