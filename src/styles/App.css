@@ -19,23 +19,10 @@ body {
     height: 100%;
 }
 
-.App {
+.Catalog {
     margin: 0 auto;
-    height: 100%;
+    min-height: 100vh;
     max-width: 1110px;
-}
-
-.myInput {
-    background: var(--main-bg-color);
-}
-
-.mySelect {
-    margin-top: 15px;
-    width: 150px;
-}
-
-.filters {
     display: flex;
-    gap: 30px;
+    flex-direction: column;
 }
-
