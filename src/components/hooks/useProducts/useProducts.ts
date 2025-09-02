@@ -1,6 +1,9 @@
 import { useMemo } from "react";
+import { ProductType } from "../../../types";
 
-export const useSearchedProducts = (products, searchQuery) => {
+type SearchedProductsType = <T extends ProductType>(products: T[], searchQuery: string) => T[];
+
+export const useSearchedProducts: SearchedProductsType = (products, searchQuery) => {
     const searchedProducts = useMemo(() => {
         return [...products].filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
     }, [products, searchQuery]);

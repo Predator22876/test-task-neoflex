@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
 
-export const useScroll = (px = 10) => {
+export const useScroll = (px: number = 10): boolean => {
     const [isScrolled, setIsScrolled] = useState(false)
 
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = (): void => {
             setIsScrolled(window.scrollY > px)
         }
 

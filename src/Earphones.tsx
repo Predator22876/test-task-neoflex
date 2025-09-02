@@ -1,24 +1,28 @@
-import { useEffect, useState } from 'react';
-import { useCategorizedProducts } from './components/hooks/useCategorizedProducts/useCategorizedProducts';
-import { Input } from 'antd';
-import { Filters } from './components/Filters';
-import ProductsList from './components/ProductsList';
-import Footer from './components/UI/footer/Footer';
-import Header from './components/UI/header/Header';
+import React, { useEffect, useState } from 'react';
+// import styles
 import './styles/Earphones.css';
-
-// import of images
+// import IMGs
 import airPods from './assets/AirPods.png';
 import appleAirPods from './assets/Apple AirPods.png';
 import appleBYZ from './assets/Apple BYZ S852I.png';
 import earPods from './assets/Apple EarPods.png';
 import borofone from './assets/BOROFONE BO4.png';
 import herlax from './assets/HERLAX GH- 04.png';
+// import components
+import { Input } from 'antd';
 import { useProducts } from './components/hooks/useProducts/useProducts';
+import { useCategorizedProducts } from './components/hooks/useCategorizedProducts/useCategorizedProducts';
+import { Filters } from './components/Filters';
+import ProductsList from './components/ProductsList';
+import Footer from './components/UI/footer/Footer';
+import Header from './components/UI/header/Header';
+// import types
+import { BasketItemType, FilterType, ProductType } from './types';
+
 
 function Earphones() {
 
-    const [products] = useState([
+    const [products] = useState<ProductType[]>([
         { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 6789, rate: 4.3, category: 'earphones' },
         { id: '2', img: earPods, title: 'Apple EarPods', price: 4248, rate: 4.5, category: 'earphones' },
         { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 8853, rate: 4.5, category: 'earphones' },
@@ -31,13 +35,13 @@ function Earphones() {
     ]);
 
     // states 
-    const [basketItems, setBasketItems] = useState([]);
-    const [filter, setFilter] = useState({ searchQuery: '', sortMethod: '', groupBy: '' });
+    const [basketItems, setBasketItems] = useState<BasketItemType[]>([]);
+    const [filter, setFilter] = useState<FilterType>({ searchQuery: '', sortMethod: '', groupBy: '' });
     // ------------------------------------------------------------------------
 
     // filters and search
     const sortedAndSearchedProducts = useProducts(products, filter.searchQuery, filter.sortMethod);
-    const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless'])
+    const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless']);
     // --------------------------------------------------------------------------------------------
 
     // actions with localStorage
@@ -53,7 +57,7 @@ function Earphones() {
     }, [basketItems]);
     // ----------------------------------------------------------------------------
 
-    function addToBasket(newItem) {
+    function addToBasket(newItem: ProductType): void {
         setBasketItems(prev => {
             const existingItem = prev.find(item => item.id === newItem.id)
             if (existingItem) {
@@ -77,7 +81,7 @@ function Earphones() {
                 variant='underlined'
             />
             <Filters filter={filter} setFilter={setFilter} />
-            
+
             {filter.groupBy === 'category'
                 ?
                 <>
