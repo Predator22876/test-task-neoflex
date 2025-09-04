@@ -28,3 +28,5 @@ export interface FilterType {
     sortMethod: string,
     groupBy: string
 }
+
+export type SortMethodsType = "title" | "rate" | "priceDown" | "priceUp"
