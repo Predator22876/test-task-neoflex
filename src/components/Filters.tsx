@@ -1,6 +1,16 @@
+import React from "react"
+// import components
 import { Select } from "antd"
+// import types
+import { FilterType, SortMethodsType } from './../types/index';
 
-export const Filters = ({ setFilter, filter }) => {
+
+interface FiltersProps {
+    filter: FilterType;
+    setFilter: (arg: FilterType) => void;
+}
+
+export const Filters = ({ setFilter, filter }: FiltersProps) => {
     return (
         <div className='filters'>
             <Select
@@ -11,7 +21,7 @@ export const Filters = ({ setFilter, filter }) => {
                     { label: 'Дешевле', value: 'priceUp' },
                     { label: 'Дороже', value: 'priceDown' },
                 ]}
-                onChange={value => setFilter({ ...filter, sortMethod: value })}
+                onChange={value => setFilter({ ...filter, sortMethod: value as SortMethodsType })}
                 className={'mySelect'}
             />
             <Select

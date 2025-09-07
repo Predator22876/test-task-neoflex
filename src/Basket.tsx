@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+// import styles
+import "./styles/Basket.css";
+// import components
 import Footer from "./components/UI/footer/Footer";
 import Header from "./components/UI/header/Header";
-import BasketItem from "./components/BasketItem";
-import "./styles/Basket.css";
 import BasketList from "./components/BasketList";
+// import types
+import { BasketItemType } from "./types";
 
 function Basket() {
 
-    const [basketItems, setBasketItems] = useState([]);
+    const [basketItems, setBasketItems] = useState<BasketItemType[]>([]);
 
     useEffect(() => {
         const handlerStorageChange = () => {
@@ -30,7 +33,7 @@ function Basket() {
         sessionStorage.setItem('basketItems', JSON.stringify(basketItems));
     }, [basketItems])
 
-    function itemIncrease(id) {
+    function itemIncrease(id: string): void {
         setBasketItems(prev =>
             prev.map(item =>
                 item.id === id
@@ -40,17 +43,17 @@ function Basket() {
         )
     }
 
-    function itemDecrease(id) {
+    function itemDecrease(id: string): void {
         setBasketItems(prev =>
-            prev.map(item => 
-                item.id === id
-                    ? item.quantity === 1 ? null : { ...item, quantity: item.quantity - 1 }
+            prev.map(item =>
+                item.id === id && item.quantity >= 0
+                    ? { ...item, quantity: item.quantity - 1 }
                     : item
-            ).filter(Boolean)
+            ).filter(item => item.quantity > 0)
         )
     }
 
-    function deleteItem(index) {
+    function deleteItem(index: number): void {
         const newBasket = [...basketItems];
         newBasket.splice(index, 1);
         setBasketItems(newBasket);

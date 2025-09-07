@@ -1,11 +1,23 @@
+import React from 'react';
+// import styles
 import s from './BasketItem.module.css';
-
+// import IMGs
 import deleteI from './../assets/DeleteItem.svg';
+// import types
+import { BasketItemType } from '../types';
 
-const BasketItem = ({ item, deleteAll, index, onIncrease, onDecrease }) => {
+interface BasketItemProps {
+    item: BasketItemType;
+    deleteAll: (index: number) => void;
+    index: number;
+    onIncrease: (id: string) => void;
+    onDecrease: (id: string) => void;
+}
 
-    function deleteCard() {
-        deleteAll(index)
+const BasketItem = ({ item, deleteAll, index, onIncrease, onDecrease }: BasketItemProps) => {
+
+    function deleteCard(): void {
+        deleteAll(index);
     }
 
     return (
@@ -35,4 +47,4 @@ const BasketItem = ({ item, deleteAll, index, onIncrease, onDecrease }) => {
     )
 }
 
-export default BasketItem
+export default BasketItem;

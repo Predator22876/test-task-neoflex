@@ -100,6 +100,3 @@ function Earphones() {
 }
 
 export default Earphones;
-
-// import { Filters } from './components/Filters';
-{/* <Filters onClick={() => setVisible(true)} visible={visible} setVisible={setVisible} setFilter={setFilter} filter={filter} /> */ }

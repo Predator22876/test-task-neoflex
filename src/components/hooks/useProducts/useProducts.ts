@@ -1,8 +1,6 @@
 import { ProductType, SortMethodsType } from './../../../types/index';
 import { useMemo } from "react";
 
-export type SortMethod = "title" | "rate" | "priceDown" | "priceUp";
-
 export const useSearchedProducts = <T extends ProductType>(products: T[], searchQuery: string): T[] => {
     const searchedProducts = useMemo(() => {
         return [...products].filter(item => item.title.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -17,7 +15,7 @@ export const useProducts = <T extends ProductType>(products: T[], searchQuery: s
     const sortedAndSearchedProducts = useMemo(() => {
         if (!sortMethod) return searchedProducts;
 
-        const sortMethods: Record<SortMethod, (a: T, b: T) => number> = {
+        const sortMethods: Record<SortMethodsType, (a: T, b: T) => number> = {
             title: (a, b) => a.title.localeCompare(b.title),
             rate: (a, b) => b.rate - a.rate,
             priceDown: (a, b) => b.price - a.price,
@@ -25,10 +23,10 @@ export const useProducts = <T extends ProductType>(products: T[], searchQuery: s
         }
 
         if (sortMethod in sortMethods) {
-            return [...searchedProducts].sort(sortMethods[sortMethod as SortMethod]);
+            return [...searchedProducts].sort(sortMethods[sortMethod]);
         }
         return searchedProducts;
     }, [searchedProducts, sortMethod]);
-    
+
     return sortedAndSearchedProducts;
 }

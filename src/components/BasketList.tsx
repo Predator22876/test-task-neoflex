@@ -1,9 +1,21 @@
-import BasketItem from './BasketItem';
+import React from 'react';
+// import styles
 import s from './BasketList.module.css';
+// import components
+import BasketItem from './BasketItem';
+// import types
+import { BasketItemType } from '../types';
 
-const BasketList = ({ basketItems, deleteItem, onIncrease, onDecrease }) => {
+interface BasketListProps {
+    basketItems: BasketItemType[];
+    deleteItem: (index: number) => void; 
+    onIncrease: (id: string) => void;
+    onDecrease: (id: string) => void;
+}
 
-    const totalOrderSum = basketItems.reduce((acum, item) => acum + (item.quantity * item.price), 0)
+const BasketList = ({ basketItems, deleteItem, onIncrease, onDecrease }: BasketListProps) => {
+
+    const totalOrderSum: number = basketItems.reduce((acum, item) => acum + (item.quantity * item.price), 0);
 
     return (
         <div className={s.basketList}>

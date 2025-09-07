@@ -1,9 +1,17 @@
-import React from 'react'
-import s from './ProductItem.module.css'
+import React from 'react';
+// import styles
+import s from './ProductItem.module.css';
+// import IMGs
+import starRate from './../assets/starRate.svg';
+// import types
+import { ProductType } from '../types';
 
-import starRate from './../assets/starRate.svg'
+interface ProductItemProps {
+    product: ProductType;
+    addBasket: (newItem: ProductType) => void;
+}
 
-const ProductItem = ({ addBasket, product }) => {
+const ProductItem = ({ addBasket, product }: ProductItemProps) => {
 
     function addItem() {
         const newItem = {
@@ -34,4 +42,4 @@ const ProductItem = ({ addBasket, product }) => {
     )
 }
 
-export default ProductItem
+export default ProductItem;

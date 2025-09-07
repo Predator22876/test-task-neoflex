@@ -1,7 +1,17 @@
-import ProductItem from './ProductItem'
-import s from './ProductsList.module.css'
+import React from 'react';
+// import styles
+import s from './ProductsList.module.css';
+// import components
+import ProductItem from './ProductItem';
+import { ProductType } from '../types';
 
-const ProductsList = ({ products, title, addBasket }) => {
+interface ProductsListProps {
+    products: ProductType[];
+    title: string;
+    addBasket: (newItem: ProductType) => void;
+}
+
+const ProductsList = ({ products, title, addBasket }: ProductsListProps) => {
 
     return (
         <div className={s.productList}>

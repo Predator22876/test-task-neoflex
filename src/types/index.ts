@@ -24,9 +24,9 @@ export interface CatalogItemType {
 }
 
 export interface FilterType {
-    searchQuery: string,
-    sortMethod: string,
-    groupBy: string
+    searchQuery: string;
+    sortMethod: SortMethodsType | "";
+    groupBy: string;
 }
 
-export type SortMethodsType = "title" | "rate" | "priceDown" | "priceUp"
+export type SortMethodsType = "title" | "rate" | "priceDown" | "priceUp";
