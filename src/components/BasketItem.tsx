@@ -8,8 +8,8 @@ import { BasketItemType } from '../types';
 
 interface BasketItemProps {
     item: BasketItemType;
-    deleteAll: (index: number) => void;
     index: number;
+    deleteAll: (index: number) => void;
     onIncrease: (id: string) => void;
     onDecrease: (id: string) => void;
 }

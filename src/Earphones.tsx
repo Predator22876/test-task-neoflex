@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 // import styles
 import './styles/Earphones.css';
 // import IMGs
@@ -18,20 +18,22 @@ import Footer from './components/UI/footer/Footer';
 import Header from './components/UI/header/Header';
 // import types
 import { BasketItemType, FilterType, ProductType } from './types';
+import { useCategories } from './components/hooks/useCategories/useCategories';
+import { ProductContent } from './components/ProductContent';
 
 
 function Earphones() {
 
     const [products] = useState<ProductType[]>([
-        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 6789, rate: 4.3, category: 'earphones' },
-        { id: '2', img: earPods, title: 'Apple EarPods', price: 4248, rate: 4.5, category: 'earphones' },
-        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 8853, rate: 4.5, category: 'earphones' },
-        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 1813, rate: 4.6, category: 'earphones' },
-        { id: '5', img: earPods, title: 'Apple EarPods', price: 3200, rate: 4, category: 'earphones' },
-        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones' },
-        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 5, category: 'wireless' },
-        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 3.8, category: 'wireless' },
-        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.1, category: 'wireless' }
+        { id: '1', img: appleBYZ, title: 'Apple BYZ S852I', price: 6789, rate: 4.3, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '2', img: earPods, title: 'Apple EarPods', price: 4248, rate: 4.5, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '3', img: appleAirPods, title: 'Apple EarPods', price: 8853, rate: 4.5, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '4', img: appleBYZ, title: 'Apple BYZ S852I', price: 1813, rate: 4.6, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '5', img: earPods, title: 'Apple EarPods', price: 3200, rate: 4, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '6', img: appleAirPods, title: 'Apple EarPods', price: 2327, rate: 4, category: 'earphones', categoryTitle: 'Наушники', subCategoryTitle: 'Наушники' },
+        { id: '7', img: airPods, title: 'Apple AirPods', price: 9527, rate: 5, category: 'wireless', categoryTitle: 'Беспроводные наушники', subCategoryTitle: 'Беспроводные наушники' },
+        { id: '8', img: herlax, title: 'GERLAX GH-04', price: 6527, rate: 3.8, category: 'wireless', categoryTitle: 'Беспроводные наушники', subCategoryTitle: 'Беспроводные наушники' },
+        { id: '9', img: borofone, title: 'BOROFONE BO4', price: 7527, rate: 4.1, category: 'wireless', categoryTitle: 'Беспроводные наушники', subCategoryTitle: 'Беспроводные наушники' }
     ]);
 
     // states 
@@ -41,7 +43,8 @@ function Earphones() {
 
     // filters and search
     const sortedAndSearchedProducts = useProducts(products, filter.searchQuery, filter.sortMethod);
-    const category = useCategorizedProducts(sortedAndSearchedProducts, ['earphones', 'wireless']);
+    const allUniqueCategories = useCategories(products);
+    const categorizedProducts = useCategorizedProducts(sortedAndSearchedProducts, allUniqueCategories);
     // --------------------------------------------------------------------------------------------
 
     // actions with localStorage
@@ -81,19 +84,13 @@ function Earphones() {
                 variant='underlined'
             />
             <Filters filter={filter} setFilter={setFilter} />
-
-            {filter.groupBy === 'category'
-                ?
-                <>
-                    <ProductsList addBasket={addToBasket} title='Наушники' products={category.earphones} />
-                    <ProductsList addBasket={addToBasket} title='Беспроводные наушники' products={category.wireless} />
-                </>
-                :
-                <>
-                    <ProductsList addBasket={addToBasket} title='Наушники' products={sortedAndSearchedProducts} />
-                </>
-            }
-
+            <ProductContent
+            addToBasket={addToBasket}
+            filter={filter}
+            categorizedProducts={categorizedProducts}
+            sortedAndSearchedProducts={sortedAndSearchedProducts}
+            allUniqueCategories={allUniqueCategories}
+            />
             <Footer />
         </div>
     )

@@ -5,6 +5,8 @@ export interface ProductType {
     price: number;
     rate: number;
     category: string;
+    categoryTitle: string;
+    subCategoryTitle: string;
 }
 
 export interface BasketItemType {
